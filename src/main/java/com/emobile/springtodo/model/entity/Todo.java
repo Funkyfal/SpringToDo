@@ -1,4 +1,4 @@
-package com.emobile.springtodo.model;
+package com.emobile.springtodo.model.entity;
 
 import lombok.*;
 
@@ -15,6 +15,6 @@ public class Todo {
     private String title;
     private String description;
     //Возможно будет проблема в нейминге: в бд due_date
-    private LocalDateTime dueDate;
+    private LocalDateTime due_date;
     private boolean completed;
 }

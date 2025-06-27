@@ -21,7 +21,7 @@ databaseChangeLog:
                   name: description
                   type: TEXT
               - column:
-                  name: due_data
+                  name: due_date
                   type: DATETIME
               - column:
                   name: completed
