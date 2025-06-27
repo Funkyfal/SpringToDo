@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: SpringToDo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tododb
+    username: postgres
+    password: DBPASSWORD
