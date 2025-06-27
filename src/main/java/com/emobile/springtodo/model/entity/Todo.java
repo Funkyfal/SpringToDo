@@ -14,7 +14,6 @@ public class Todo {
     private Long id;
     private String title;
     private String description;
-    //Возможно будет проблема в нейминге: в бд due_date
     private LocalDateTime due_date;
     private boolean completed;
 }

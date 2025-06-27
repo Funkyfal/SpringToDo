@@ -28,6 +28,7 @@ public class TodoRepositoryImpl implements TodoRepository {
             .due_date(rs.getTimestamp("due_date").toLocalDateTime())
             .build();
 
+    //TODO: сделать эксепшн
     @Override
     public Optional<Todo> findById(Long id) {
         String sql = "SELECT * FROM todo WHERE id = ?";
@@ -68,20 +69,28 @@ public class TodoRepositoryImpl implements TodoRepository {
         return todo;
     }
 
-
     @Override
-    public Todo update(Todo todo, Long id) {
+    public Todo update(Todo incoming, Long id) {
         String sql = """
-                UPDATE todo  SET title = ?, description = ?, due_date = ?, completed = ? WHERE id = ?
-                """;
+        UPDATE todo
+           SET title       = COALESCE(?, title),
+               description = COALESCE(?, description),
+               due_date    = COALESCE(?, due_date),
+               completed   = COALESCE(?, completed)
+         WHERE id = ?
+        """;
+
         jdbcTemplate.update(sql,
-                todo.getTitle(),
-                todo.getDescription(),
-                todo.getDue_date(),
-                todo.isCompleted(),
+                incoming.getTitle(),
+                incoming.getDescription(),
+                incoming.getDue_date(),
+                incoming.isCompleted(),
                 id);
-        return todo;
+
+        return findById(id)
+                .orElseThrow(() -> new IllegalStateException("Updated todo wasn't found"));
     }
+
 
     @Override
     public void deleteById(Long id) {
