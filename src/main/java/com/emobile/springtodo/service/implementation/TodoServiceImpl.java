@@ -8,6 +8,7 @@ import com.emobile.springtodo.model.entity.Todo;
 import com.emobile.springtodo.model.mapper.TodoMapper;
 import com.emobile.springtodo.repository.TodoRepository;
 import com.emobile.springtodo.service.TodoService;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
     private final TodoMapper todoMapper;
+    private final MeterRegistry meterRegistry;
 
     @Override
     @Cacheable(key = "#id")
@@ -67,6 +69,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     @CachePut(key = "#id")
     public TodoDto completeById(Long id) {
+        meterRegistry.counter("todos.completed").increment();
         return todoMapper.toDto(todoRepository.completeById(id));
     }
 
