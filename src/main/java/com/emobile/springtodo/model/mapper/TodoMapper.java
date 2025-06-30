@@ -7,7 +7,7 @@ import com.emobile.springtodo.model.entity.Todo;
 import org.mapstruct.*;
 
 @Mapper(
-        componentModel = "spring",
+        componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         builder = @Builder(disableBuilder = true)
 )
