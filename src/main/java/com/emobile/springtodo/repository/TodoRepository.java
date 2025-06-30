@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface TodoRepository {
 
     Optional<Todo> findById(Long id);
-    List<Todo> findAll();
+    List<Todo> findAll(int limit, int offset);
     Todo save(Todo todo);
     Todo update(Todo todo, Long id);
     void deleteById(Long id);

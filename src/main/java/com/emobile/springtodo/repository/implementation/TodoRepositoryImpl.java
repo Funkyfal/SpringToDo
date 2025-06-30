@@ -28,7 +28,6 @@ public class TodoRepositoryImpl implements TodoRepository {
             .due_date(rs.getTimestamp("due_date").toLocalDateTime())
             .build();
 
-    //TODO: сделать эксепшн
     @Override
     public Optional<Todo> findById(Long id) {
         String sql = "SELECT * FROM todo WHERE id = ?";
@@ -41,9 +40,9 @@ public class TodoRepositoryImpl implements TodoRepository {
     }
 
     @Override
-    public List<Todo> findAll() {
-        String sql = "SELECT * FROM todo";
-        return jdbcTemplate.query(sql, todoRowMapper);
+    public List<Todo> findAll(int limit, int offset) {
+        String sql = "SELECT * FROM todo ORDER BY id LIMIT ? OFFSET ?";
+        return jdbcTemplate.query(sql, todoRowMapper, limit, offset);
     }
 
     @Override

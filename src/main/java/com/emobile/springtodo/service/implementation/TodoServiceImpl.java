@@ -1,4 +1,4 @@
-package com.emobile.springtodo.service;
+package com.emobile.springtodo.service.implementation;
 
 import com.emobile.springtodo.exception.TodoNotFoundException;
 import com.emobile.springtodo.model.dto.TodoCreateDto;
@@ -7,6 +7,7 @@ import com.emobile.springtodo.model.dto.TodoUpdateDto;
 import com.emobile.springtodo.model.entity.Todo;
 import com.emobile.springtodo.model.mapper.TodoMapper;
 import com.emobile.springtodo.repository.TodoRepository;
+import com.emobile.springtodo.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<TodoDto> findAllTodo() {
-        return todoRepository.findAll().stream()
+    public List<TodoDto> findAllTodo(int limit, int offset) {
+        return todoRepository.findAll(limit, offset).stream()
                 .map(todoMapper::toDto)
                 .collect(Collectors.toList());
     }

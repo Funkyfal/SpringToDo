@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TodoService {
     TodoDto findTodo(Long id);
-    List<TodoDto> findAllTodo();
+    List<TodoDto> findAllTodo(int limit, int offset);
     TodoDto saveTodo(TodoCreateDto incoming);
     TodoDto updateTodo(TodoUpdateDto incoming, Long id);
     void deleteTodo(Long id);
