@@ -46,7 +46,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    @CacheEvict(key = "#id")
+    @CachePut(key = "#id")
     public TodoDto updateTodo(TodoUpdateDto incoming, Long id) {
         Todo existingTodo = todoRepository.findById(id)
                 .orElseThrow(() -> new TodoNotFoundException("Todo with id:" + id + " was not found."));
@@ -56,10 +56,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    @Caching(evict = {
-            @CacheEvict(key = "#id"),
-            @CacheEvict(key = "'list'")
-    })
+    @CacheEvict(key = "#id")
     public void deleteTodo(Long id) {
         if (!todoRepository.existsById(id)) {
             throw new TodoNotFoundException("Todo with id:" + id + " was not found.");

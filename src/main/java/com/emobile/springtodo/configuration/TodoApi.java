@@ -1,4 +1,4 @@
-package com.emobile.springtodo.controller;
+package com.emobile.springtodo.configuration;
 
 import com.emobile.springtodo.model.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
