@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: SpringToDo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tododb
+    username: postgres
+    password: DBPASSWORD
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
